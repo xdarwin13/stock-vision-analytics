@@ -20,10 +20,12 @@ func getEnv(key, fallback string) string {
 }
 
 func main() {
-	// Configuration
+	// Configuration - Recommended to set via environment variables
+	// Example: export API_EMAIL="your-email@example.com"
+	// Example: export API_PASSWORD="your-challenge-password"
 	dbConnStr := getEnv("DATABASE_URL", "postgresql://root@localhost:26257/stock_app?sslmode=disable")
-	apiEmail := getEnv("API_EMAIL", "darwindavid.a07@gmail.com")
-	apiPassword := getEnv("API_PASSWORD", "p/**/FROM/**/users;--")
+	apiEmail := getEnv("API_EMAIL", "")
+	apiPassword := getEnv("API_PASSWORD", "")
 	port := getEnv("PORT", "8080")
 
 	// Connect to database

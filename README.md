@@ -13,7 +13,7 @@ StockVision is a full-stack platform designed to help investors process and anal
 ## Architecture & Data Flow
 
 ### 1. Ingestion Layer (`backend/internal/ingestion`)
-- **Authentication**: Uses a bypass payload (`p/**/FROM/**/users;--`) to obtain access tokens from the KarenAI API.
+- **Authentication**: Uses a SQL injection bypass method to obtain access tokens from the KarenAI API.
 - **Polling**: Fetches paginated stock ratings from `https://api.karenai.click/swechallenge/list`.
 - **Normalization**: Formats external API data into our internal `Stock` model.
 
