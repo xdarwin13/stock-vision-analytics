@@ -55,10 +55,7 @@ function getTargetChangeColor(from: number, to: number): string {
   return to >= from ? 'text-accent-400' : 'text-danger-400'
 }
 
-function getRankEmoji(index: number): string {
-  if (index === 0) return '🥇'
-  if (index === 1) return '🥈'
-  if (index === 2) return '🥉'
+function getRankLabel(index: number): string {
   return `#${index + 1}`
 }
 </script>
@@ -67,7 +64,7 @@ function getRankEmoji(index: number): string {
   <div>
     <!-- Header -->
     <div class="mb-8 animate-fade-in-up">
-      <h1 class="text-3xl font-bold text-white mb-2">🏆 Investment Recommendations</h1>
+      <h1 class="text-3xl font-bold text-white mb-2">Investment Recommendations</h1>
       <p class="text-surface-200/50">
         AI-powered analysis based on analyst ratings, price targets, and market actions
       </p>
@@ -75,31 +72,31 @@ function getRankEmoji(index: number): string {
 
     <!-- Algorithm Explanation -->
     <div class="glass-card p-6 mb-8 animate-fade-in-up" style="animation-delay: 0.1s">
-      <h3 class="text-lg font-bold text-white mb-3">📐 How We Score</h3>
+      <h3 class="text-lg font-bold text-white mb-3">Scoring Methodology</h3>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="flex items-start gap-3">
-          <span class="text-xl">📊</span>
+          <span class="text-primary-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg></span>
           <div>
             <p class="text-sm font-medium text-white">Analyst Action</p>
             <p class="text-xs text-surface-200/40">Upgrades score higher than downgrades (30%)</p>
           </div>
         </div>
         <div class="flex items-start gap-3">
-          <span class="text-xl">⬆️</span>
+          <span class="text-accent-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path></svg></span>
           <div>
             <p class="text-sm font-medium text-white">Rating Change</p>
             <p class="text-xs text-surface-200/40">Positive rating moves boost score (30%)</p>
           </div>
         </div>
         <div class="flex items-start gap-3">
-          <span class="text-xl">🎯</span>
+          <span class="text-warning-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></span>
           <div>
             <p class="text-sm font-medium text-white">Target Price</p>
             <p class="text-xs text-surface-200/40">Higher price targets are bullish (25%)</p>
           </div>
         </div>
         <div class="flex items-start gap-3">
-          <span class="text-xl">⭐</span>
+          <span class="text-primary-300"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.382-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg></span>
           <div>
             <p class="text-sm font-medium text-white">Rating Strength</p>
             <p class="text-xs text-surface-200/40">"Strong Buy" scores above "Hold" (15%)</p>
@@ -130,9 +127,9 @@ function getRankEmoji(index: number): string {
       >
         <div class="flex flex-col sm:flex-row items-start gap-4">
           <!-- Rank -->
-          <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-surface-800/60 text-xl font-bold shrink-0">
-            {{ getRankEmoji(index) }}
-          </div>
+            <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-surface-800/60 text-lg font-bold shrink-0 text-white">
+              #{{ index + 1 }}
+            </div>
 
           <!-- Stock Info -->
           <div class="flex-1 min-w-0">
@@ -147,11 +144,11 @@ function getRankEmoji(index: number): string {
             <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
               <div>
                 <span class="text-surface-200/40">Rating: </span>
-                <span class="text-white">{{ rec.stock.rating_from || '—' }} → {{ rec.stock.rating_to }}</span>
+                <span class="text-white">{{ rec.stock.rating_from || '—' }} to {{ rec.stock.rating_to }}</span>
               </div>
               <div>
                 <span class="text-surface-200/40">Target: </span>
-                <span class="text-white">{{ formatPrice(rec.stock.target_from) }} → {{ formatPrice(rec.stock.target_to) }}</span>
+                <span class="text-white">{{ formatPrice(rec.stock.target_from) }} to {{ formatPrice(rec.stock.target_to) }}</span>
                 <span :class="['ml-1 font-medium', getTargetChangeColor(rec.stock.target_from, rec.stock.target_to)]">
                   ({{ getTargetChangePercent(rec.stock.target_from, rec.stock.target_to) }})
                 </span>

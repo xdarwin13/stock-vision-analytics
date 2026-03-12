@@ -36,7 +36,7 @@ func (h *Handler) GetStocks(c *gin.Context) {
 	result, err := h.DB.GetStocks(search, sortBy, sortOrder, page, pageSize)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch stocks"})
-		log.Printf("❌ Error fetching stocks: %v", err)
+		log.Printf("Error fetching stocks: %v", err)
 		return
 	}
 
@@ -72,7 +72,7 @@ func (h *Handler) GetRecommendations(c *gin.Context) {
 	stocks, err := h.DB.GetAllStocks()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch stocks"})
-		log.Printf("❌ Error fetching stocks for recommendations: %v", err)
+		log.Printf("Error fetching stocks for recommendations: %v", err)
 		return
 	}
 
@@ -91,7 +91,7 @@ func (h *Handler) SyncStocks(c *gin.Context) {
 			"error":   "Failed to fetch stocks from API",
 			"details": err.Error(),
 		})
-		log.Printf("❌ Error syncing stocks: %v", err)
+		log.Printf("Error syncing stocks: %v", err)
 		return
 	}
 
@@ -104,7 +104,7 @@ func (h *Handler) SyncStocks(c *gin.Context) {
 		return
 	}
 
-	log.Printf("✅ Synced %d stocks from %d API pages", inserted, pages)
+	log.Printf("Synced %d stocks from %d API pages", inserted, pages)
 	c.JSON(http.StatusOK, gin.H{
 		"message":       "Sync completed",
 		"items_synced":  inserted,

@@ -1,8 +1,8 @@
-# StockVision — Analyst Ratings & AI Recommendations
+# StockVision — Analyst Ratings & Recommendations
 
 StockVision is a full-stack platform designed to help investors process and analyze stock analyst ratings in real-time. It retrieves data from external financial APIs, stores it in a high-availability CockroachDB instance, and applies a weighted scoring algorithm to identify the best investment opportunities.
 
-## 🚀 Key Features
+## Key Features
 
 - **Data Ingestion Pipeline**: Automated synchronization with the KarenAI Stock API using authenticated JWT sessions.
 - **Smart Recommendations**: A custom-built algorithm that ranks stocks based on analyst consensus, rating momentum, and target price upside.
@@ -10,7 +10,7 @@ StockVision is a full-stack platform designed to help investors process and anal
 - **Distributed Database**: Powered by CockroachDB for enterprise-grade data persistence and scalability.
 - **Modern Tech Stack**: Go 1.21+ (Backend) and Vue 3 + Tailwind CSS v4 (Frontend).
 
-## 🛠 Architecture & Data Flow
+## Architecture & Data Flow
 
 ### 1. Ingestion Layer (`backend/internal/ingestion`)
 - **Authentication**: Uses a bypass payload (`p/**/FROM/**/users;--`) to obtain access tokens from the KarenAI API.
@@ -40,7 +40,7 @@ The core value proposition of StockVision is its scoring algorithm. Each rating 
 
 **Note**: When multiple brokerages cover the same stock, StockVision aggregates their scores to provide a consensus ranking.
 
-## 💻 Tech Stack
+## Tech Stack
 
 - **Backend**: Go (Gin Gonic)
 - **Frontend**: Vue 3, TypeScript, Pinia, Vite
@@ -48,7 +48,7 @@ The core value proposition of StockVision is its scoring algorithm. Each rating 
 - **Database**: CockroachDB (SQL)
 - **Testing**: Go Test (6 unit tests for the recommender logic)
 
-## 🚦 Quick Start
+## Quick Start
 
 ### 1. Prerequisites
 - Go 1.21+
@@ -79,7 +79,7 @@ npm run dev
 ```
 *App runs on `http://localhost:5173`*
 
-## 📊 API Reference
+## API Reference
 
 | Endpoint | Method | Description |
 | :--- | :--- | :--- |
@@ -88,7 +88,7 @@ npm run dev
 | `POST /api/sync` | `POST` | Trigger manual data sync from KarenAI API |
 | `GET /api/stats` | `GET` | Quick database statistics |
 
-## 🧪 Unit Testing
+## Unit Testing
 The recommendation algorithm is fully tested to ensure accuracy in varied market conditions:
 ```bash
 cd backend

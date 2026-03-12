@@ -3,9 +3,9 @@ import { RouterLink, RouterView } from 'vue-router'
 import { ref } from 'vue'
 
 const navItems = [
-  { name: 'Dashboard', path: '/', icon: '📊' },
-  { name: 'Stocks', path: '/stocks', icon: '📈' },
-  { name: 'Recommendations', path: '/recommendations', icon: '🏆' },
+  { name: 'Dashboard', path: '/', icon: '' },
+  { name: 'Stocks', path: '/stocks', icon: '' },
+  { name: 'Recommendations', path: '/recommendations', icon: '' },
 ]
 
 const isMobileMenuOpen = ref(false)
@@ -36,7 +36,7 @@ const isMobileMenuOpen = ref(false)
                 ? 'bg-primary-500/20 text-primary-300 shadow-lg shadow-primary-500/10'
                 : 'text-surface-200/70 hover:text-white hover:bg-white/5'"
             >
-              <span>{{ item.icon }}</span>
+              <span v-if="item.icon">{{ item.icon }}</span>
               <span>{{ item.name }}</span>
             </RouterLink>
           </div>

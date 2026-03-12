@@ -35,8 +35,8 @@ function formatPrice(value: number): string {
 }
 
 function getSortIcon(column: string): string {
-  if (store.filters.sortBy !== column) return '↕'
-  return store.filters.sortOrder === 'asc' ? '↑' : '↓'
+  if (store.filters.sortBy !== column) return ''
+  return store.filters.sortOrder === 'asc' ? ' (asc)' : ' (desc)'
 }
 
 function getTargetChangeClass(from: number, to: number): string {
@@ -62,7 +62,7 @@ const columns = [
   <div>
     <!-- Header -->
     <div class="mb-8 animate-fade-in-up">
-      <h1 class="text-3xl font-bold text-white mb-2">📈 Stock Analyst Ratings</h1>
+      <h1 class="text-3xl font-bold text-white mb-2">Stock Analyst Ratings</h1>
       <p class="text-surface-200/50">Browse, search, and sort analyst ratings and price targets</p>
     </div>
 
@@ -91,7 +91,7 @@ const columns = [
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
         </svg>
-        <span>{{ store.isSyncing ? 'Syncing...' : '🔄 Sync Data' }}</span>
+        <span>{{ store.isSyncing ? 'Syncing...' : 'Sync Data' }}</span>
       </button>
     </div>
 
@@ -172,7 +172,7 @@ const columns = [
           ? 'bg-surface-800/30 text-surface-200/20 cursor-not-allowed'
           : 'bg-surface-800/50 text-surface-200/70 hover:bg-primary-500/20 hover:text-primary-300'"
       >
-        ← Prev
+        <- Prev
       </button>
       <template v-for="page in store.totalPages" :key="page">
         <button
@@ -200,7 +200,7 @@ const columns = [
           ? 'bg-surface-800/30 text-surface-200/20 cursor-not-allowed'
           : 'bg-surface-800/50 text-surface-200/70 hover:bg-primary-500/20 hover:text-primary-300'"
       >
-        Next →
+        Next ->
       </button>
     </div>
 

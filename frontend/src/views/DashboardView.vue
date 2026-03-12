@@ -41,7 +41,7 @@ function getScoreColor(score: number): string {
     <!-- Hero Section -->
     <div class="mb-10 animate-fade-in-up">
       <h1 class="text-4xl sm:text-5xl font-bold mb-3">
-        <span class="gradient-text">Stock</span>Vision
+        StockVision
       </h1>
       <p class="text-surface-200/60 text-lg max-w-xl">
         Real-time analyst ratings, target prices, and AI-powered investment recommendations.
@@ -52,8 +52,8 @@ function getScoreColor(score: number): string {
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
       <div class="glass-card p-6 animate-fade-in-up" style="animation-delay: 0.1s">
         <div class="flex items-center gap-4">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500/20 to-primary-600/20 flex items-center justify-center text-2xl">
-            📈
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500/20 to-primary-600/20 flex items-center justify-center text-primary-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
           </div>
           <div>
             <p class="text-sm text-surface-200/50 font-medium">Total Stocks</p>
@@ -63,8 +63,8 @@ function getScoreColor(score: number): string {
       </div>
       <div class="glass-card p-6 animate-fade-in-up" style="animation-delay: 0.2s">
         <div class="flex items-center gap-4">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-500/20 to-accent-600/20 flex items-center justify-center text-2xl">
-            🏆
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-500/20 to-accent-600/20 flex items-center justify-center text-accent-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-7.714 2.143L11 21l-2.286-6.857L1 12l7.714-2.143L11 3z"></path></svg>
           </div>
           <div>
             <p class="text-sm text-surface-200/50 font-medium">Top Picks</p>
@@ -74,8 +74,8 @@ function getScoreColor(score: number): string {
       </div>
       <div class="glass-card p-6 animate-fade-in-up" style="animation-delay: 0.3s">
         <div class="flex items-center gap-4">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-warning-400/20 to-warning-500/20 flex items-center justify-center text-2xl">
-            🔄
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-warning-400/20 to-warning-500/20 flex items-center justify-center text-warning-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
           </div>
           <div>
             <p class="text-sm text-surface-200/50 font-medium">Data Source</p>
@@ -88,9 +88,9 @@ function getScoreColor(score: number): string {
     <!-- Top Recommendations -->
     <div class="mb-10 animate-fade-in-up" style="animation-delay: 0.4s">
       <div class="flex items-center justify-between mb-5">
-        <h2 class="text-2xl font-bold text-white">🏆 Top Recommendations</h2>
+        <h2 class="text-2xl font-bold text-white">Top Recommendations</h2>
         <button @click="router.push('/recommendations')" class="text-sm text-primary-400 hover:text-primary-300 transition-colors cursor-pointer">
-          View all →
+          View all ->
         </button>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -118,11 +118,11 @@ function getScoreColor(score: number): string {
           <div class="flex items-center gap-4 text-sm">
             <div>
               <p class="text-surface-200/40">Target</p>
-              <p class="text-white font-medium">{{ formatPrice(rec.stock.target_from) }} → {{ formatPrice(rec.stock.target_to) }}</p>
+              <p class="text-white font-medium">{{ formatPrice(rec.stock.target_from) }} to {{ formatPrice(rec.stock.target_to) }}</p>
             </div>
             <div>
               <p class="text-surface-200/40">Rating</p>
-              <p class="text-white font-medium">{{ rec.stock.rating_from || '—' }} → {{ rec.stock.rating_to }}</p>
+              <p class="text-white font-medium">{{ rec.stock.rating_from || '—' }} to {{ rec.stock.rating_to }}</p>
             </div>
           </div>
           <p class="mt-3 text-xs text-surface-200/40 italic">{{ rec.reason }}</p>
@@ -133,9 +133,9 @@ function getScoreColor(score: number): string {
     <!-- Recent Stocks Table -->
     <div class="animate-fade-in-up" style="animation-delay: 0.5s">
       <div class="flex items-center justify-between mb-5">
-        <h2 class="text-2xl font-bold text-white">📊 Recent Analyst Actions</h2>
+        <h2 class="text-2xl font-bold text-white">Recent Analyst Actions</h2>
         <button @click="router.push('/stocks')" class="text-sm text-primary-400 hover:text-primary-300 transition-colors cursor-pointer">
-          View all →
+          View all ->
         </button>
       </div>
       <div class="glass-card overflow-hidden">
@@ -159,8 +159,8 @@ function getScoreColor(score: number): string {
                 <td>
                   <span :class="['badge', getActionBadgeClass(stock.action)]">{{ stock.action }}</span>
                 </td>
-                <td class="text-surface-200/70">{{ stock.rating_from || '—' }} → {{ stock.rating_to }}</td>
-                <td class="text-surface-200/70">{{ formatPrice(stock.target_from) }} → {{ formatPrice(stock.target_to) }}</td>
+                <td class="text-surface-200/70">{{ stock.rating_from || '—' }} to {{ stock.rating_to }}</td>
+                <td class="text-surface-200/70">{{ formatPrice(stock.target_from) }} to {{ formatPrice(stock.target_to) }}</td>
               </tr>
             </tbody>
           </table>

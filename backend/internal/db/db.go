@@ -24,7 +24,7 @@ func New(connStr string) (*DB, error) {
 	if err := conn.Ping(); err != nil {
 		return nil, fmt.Errorf("failed to ping database: %w", err)
 	}
-	log.Println("✅ Connected to CockroachDB")
+	log.Println("Connected to CockroachDB")
 	return &DB{conn: conn}, nil
 }
 
@@ -54,7 +54,7 @@ func (d *DB) CreateTable() error {
 	if err != nil {
 		return fmt.Errorf("failed to create table: %w", err)
 	}
-	log.Println("✅ Stocks table ready")
+	log.Println("Stocks table ready")
 	return nil
 }
 
@@ -73,7 +73,7 @@ func (d *DB) InsertStocks(stocks []models.APIStock) (int, error) {
 			DO NOTHING
 		`, s.Ticker, s.Company, s.Brokerage, s.Action, s.RatingFrom, s.RatingTo, s.TargetFrom, s.TargetTo)
 		if err != nil {
-			log.Printf("⚠️  Failed to insert stock %s: %v", s.Ticker, err)
+			log.Printf("Failed to insert stock %s: %v", s.Ticker, err)
 			continue
 		}
 		inserted++

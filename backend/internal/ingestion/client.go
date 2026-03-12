@@ -67,7 +67,7 @@ func (c *Client) Login() error {
 	}
 
 	c.token = loginResp.AuthToken
-	log.Println("✅ Successfully logged in to KarenAI API")
+	log.Println("Successfully logged in to KarenAI API")
 	return nil
 }
 
@@ -128,7 +128,7 @@ func (c *Client) FetchAllStocks() ([]models.APIStock, int, error) {
 		pages++
 		allStocks = append(allStocks, resp.Items...)
 
-		log.Printf("📄 Page %d: fetched %d stocks (total: %d)", pages, len(resp.Items), len(allStocks))
+		log.Printf("Page %d: fetched %d stocks (total: %d)", pages, len(resp.Items), len(allStocks))
 
 		if resp.NextPage == "" {
 			break

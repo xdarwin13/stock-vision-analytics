@@ -29,38 +29,38 @@ func main() {
 	// Connect to database
 	database, err := db.New(dbConnStr)
 	if err != nil {
-		log.Fatalf("❌ Failed to connect to database: %v", err)
+		log.Fatalf("Failed to connect to database: %v", err)
 	}
 	defer database.Close()
 
 	// Create tables
 	if err := database.CreateTable(); err != nil {
-		log.Fatalf("❌ Failed to create tables: %v", err)
+		log.Fatalf("Failed to create tables: %v", err)
 	}
 
 	// Check if we need to seed data
 	count, _ := database.CountStocks()
 	if count == 0 {
-		log.Println("📊 Database is empty, attempting to sync from API...")
+		log.Println("Database is empty, attempting to sync from API...")
 		client := ingestion.NewClient(apiEmail, apiPassword)
 		stocks, pages, err := client.FetchAllStocks()
 		if err != nil {
-			log.Printf("⚠️  API sync failed: %v", err)
+			log.Printf("API sync failed: %v", err)
 		} else {
 			inserted, _ := database.InsertStocks(stocks)
-			log.Printf("✅ Synced %d stocks from %d pages", inserted, pages)
+			log.Printf("Synced %d stocks from %d pages", inserted, pages)
 		}
 
 		// If API returned no data, seed with sample data
 		count, _ = database.CountStocks()
 		if count == 0 {
-			log.Println("📊 API returned no data, seeding with sample data...")
+			log.Println("API returned no data, seeding with sample data...")
 			seedSampleData(database)
 		}
 	}
 
 	count, _ = database.CountStocks()
-	log.Printf("📈 Total stocks in database: %d", count)
+	log.Printf("Total stocks in database: %d", count)
 
 	// Create API client for manual sync
 	client := ingestion.NewClient(apiEmail, apiPassword)
@@ -86,9 +86,9 @@ func main() {
 		c.JSON(200, gin.H{"status": "ok"})
 	})
 
-	log.Printf("🚀 Server starting on port %s", port)
+	log.Printf("Server starting on port %s", port)
 	if err := router.Run(":" + port); err != nil {
-		log.Fatalf("❌ Failed to start server: %v", err)
+		log.Fatalf("Failed to start server: %v", err)
 	}
 }
 
@@ -152,5 +152,5 @@ func seedSampleData(database *db.DB) {
 	if err != nil {
 		log.Printf("⚠️  Error seeding data: %v", err)
 	}
-	log.Printf("🌱 Seeded %d sample stocks", inserted)
+	log.Printf("Seeded %d sample stocks", inserted)
 }
