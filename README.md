@@ -64,6 +64,12 @@ cockroach sql --insecure -e "CREATE DATABASE IF NOT EXISTS stock_app;"
 ```
 
 ### 3. Run Backend
+
+#### Environment Variables
+The backend uses a `.env` file for configuration, specifically to load the `API_TOKEN` to bypass the login steps to the mock API. 
+1. Duplicate the `backend/.env.example` file and rename it to `.env`
+2. Ensure your token is correct in the `.env` file.
+
 ```bash
 cd backend
 go mod tidy

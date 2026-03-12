@@ -72,14 +72,23 @@ function getScoreColor(score: number): string {
           </div>
         </div>
       </div>
-      <div class="glass-card p-6 animate-fade-in-up" style="animation-delay: 0.3s">
+      <div 
+        @click="store.triggerSync()"
+        class="glass-card p-6 animate-fade-in-up hover:bg-surface-800/80 transition-colors" 
+        :class="store.isSyncing ? 'cursor-wait opacity-80' : 'cursor-pointer'"
+        style="animation-delay: 0.3s"
+      >
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-warning-400/20 to-warning-500/20 flex items-center justify-center text-warning-400">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+            <svg v-if="store.isSyncing" class="animate-spin w-6 h-6" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+            <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
           </div>
           <div>
             <p class="text-sm text-surface-200/50 font-medium">Data Source</p>
-            <p class="text-lg font-bold text-white">Analyst Ratings</p>
+            <p class="text-lg font-bold text-white">{{ store.isSyncing ? 'Syncing...' : 'Sync Data' }}</p>
           </div>
         </div>
       </div>

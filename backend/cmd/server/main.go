@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"stock-app/internal/api"
 	"stock-app/internal/db"
 	"stock-app/internal/ingestion"
@@ -20,12 +21,18 @@ func getEnv(key, fallback string) string {
 }
 
 func main() {
+	// Attempt to load .env file if it exists
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found or error reading it, relying on existing environment variables")
+	}
+
 	// Configuration - Recommended to set via environment variables
 	// Example: export API_EMAIL="your-email@example.com"
 	// Example: export API_PASSWORD="your-challenge-password"
 	dbConnStr := getEnv("DATABASE_URL", "postgresql://root@localhost:26257/stock_app?sslmode=disable")
 	apiEmail := getEnv("API_EMAIL", "")
 	apiPassword := getEnv("API_PASSWORD", "")
+	apiToken := getEnv("API_TOKEN", "")
 	port := getEnv("PORT", "8080")
 
 	// Connect to database
@@ -44,7 +51,7 @@ func main() {
 	count, _ := database.CountStocks()
 	if count == 0 {
 		log.Println("Database is empty, attempting to sync from API...")
-		client := ingestion.NewClient(apiEmail, apiPassword)
+		client := ingestion.NewClient(apiEmail, apiPassword, apiToken)
 		stocks, pages, err := client.FetchAllStocks()
 		if err != nil {
 			log.Printf("API sync failed: %v", err)
@@ -65,7 +72,7 @@ func main() {
 	log.Printf("Total stocks in database: %d", count)
 
 	// Create API client for manual sync
-	client := ingestion.NewClient(apiEmail, apiPassword)
+	client := ingestion.NewClient(apiEmail, apiPassword, apiToken)
 
 	// Setup Gin router
 	gin.SetMode(gin.ReleaseMode)

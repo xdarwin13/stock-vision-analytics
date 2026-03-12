@@ -27,11 +27,12 @@ type Client struct {
 }
 
 // NewClient creates a new API client.
-func NewClient(email, password string) *Client {
+func NewClient(email, password, token string) *Client {
 	return &Client{
 		httpClient: &http.Client{},
 		email:      email,
 		password:   password,
+		token:      token,
 	}
 }
 
