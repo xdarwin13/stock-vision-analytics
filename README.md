@@ -57,9 +57,19 @@ The core value proposition of StockVision is its scoring algorithm. Each rating 
 
 ### 2. Database Setup
 ```bash
-# Install and start CockroachDB
+# Install CockroachDB
 brew install cockroachdb/tap/cockroach
-cockroach start-single-node --insecure --store=type=mem,size=0.25 --advertise-addr=localhost --background
+
+# Start CockroachDB
+# SQL port (DB): 26257
+# HTTP UI port: 8081  (so it doesn't conflict with the Go backend on 8080)
+cockroach start-single-node \
+  --insecure \
+  --store=type=mem,size=0.25 \
+  --listen-addr=localhost:26257 \
+  --http-addr=localhost:8081 \
+  --background
+
 cockroach sql --insecure -e "CREATE DATABASE IF NOT EXISTS stock_app;"
 ```
 
