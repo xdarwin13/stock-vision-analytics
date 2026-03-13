@@ -36,3 +36,7 @@ dist/
 .env.development.local
 .env.test.local
 .env.production.local
+
+# CockroachDB diagnostics
+*_dump/
+heap_profiler/
